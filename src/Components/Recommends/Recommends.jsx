@@ -17,7 +17,7 @@ const Recommends = () => {
                             Caeser Pizza
                         </h2>
                         <p className='text-lg text-black'>If a dog chews shoes whose shoes does he choose? You can get this buy with offer</p>
-                        <button className='py-4 px-8 font-bold border-b-4 border-yellow-500 shadow-2xl rounded-xl hover:bg-slate-700 hover:text-white mt-5'>Add To Cart</button>
+                        <button className='py-4 px-8 font-bold border-b-4 border-slate-900 shadow-2xl rounded-xl hover:bg-slate-900 hover:text-white mt-5'>Add To Cart</button>
                     </div>
                 </div>
                 <div className="card w-96 bg-base-100 shadow-xl">
@@ -27,7 +27,7 @@ const Recommends = () => {
                             Caeser Salads
                         </h2>
                         <p className='text-lg text-black'>If a dog chews shoes whose shoes does he choose? You can get this buy with offer</p>
-                        <button className='py-4 px-8 font-bold border-b-4 border-yellow-500 shadow-2xl rounded-xl hover:bg-slate-700 hover:text-white mt-5'>Add To Cart</button>
+                        <button className='py-4 px-8 font-bold border-b-4 border-slate-900 shadow-2xl rounded-xl hover:bg-slate-900 hover:text-white mt-5'>Add To Cart</button>
                     </div>
                 </div>
                 <div className="card w-96 bg-base-100 shadow-xl">
@@ -37,7 +37,7 @@ const Recommends = () => {
                             Caeser Shoup
                         </h2>
                         <p className='text-lg text-black'>If a dog chews shoes whose shoes does he choose? You can get this buy with offer</p>
-                        <button className='py-4 px-8 font-bold border-b-4 border-yellow-500 shadow-2xl rounded-xl hover:bg-slate-700 hover:text-white mt-5'>Add To Cart</button>
+                        <button className='py-4 px-8 font-bold border-b-4 border-slate-900 shadow-2xl rounded-xl hover:bg-slate-900 hover:text-white mt-5'>Add To Cart</button>
                     </div>
                 </div>
             </div>
