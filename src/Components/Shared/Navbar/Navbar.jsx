@@ -2,9 +2,24 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../../../provider/AuthProvider';
 import { FaShoppingCart } from 'react-icons/fa';
+import { useEffect } from 'react';
+import { useState } from 'react';
+import useCarts from '../../../Hooks/useCarts';
+
+
 
 const Navbar = () => {
     const { user, logOut } = useContext(UserContext);
+    const [cart] = useCarts()
+    console.log('cart item', cart);
+    // const [carts, setCarts] = useState([]);
+    // console.log(carts);
+
+    // useEffect( () =>{
+    //     fetch(`http://localhost:5000/carts?email=${user?.email}`)
+    //     .then(res => res.json())
+    //     .then(data => setCarts(data));
+    // }, [carts])
 
     const handleLogOut = () => {
         logOut()
@@ -20,7 +35,7 @@ const Navbar = () => {
         <li><Link to="/">
             <button className="flex gap-1 items-center">
                 <FaShoppingCart className='text-2xl'></FaShoppingCart>
-                <div className="badge -mt-5 -ml-5 badge-secondary">+99</div>
+                <div className="badge -mt-5 -ml-5 badge-secondary">+{cart?.length || 0}</div>
             </button>
         </Link></li>
 

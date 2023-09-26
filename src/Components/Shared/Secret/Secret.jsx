@@ -1,23 +1,13 @@
 import React from 'react';
+import useCarts from '../../../Hooks/useCarts';
 
 const Secret = () => {
-
-    const handleTestData = () =>{
-        const items = {name: 'noornabi', email: 'nurnobi@gmail.com', work: 'teacher'}
-        console.log(items)
-        fetch('http://localhost:5000/test', {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(items)
-        })
-    }
-
-    return (
+    const [cart] = useCarts();
+    console.log(cart);
+    console.log("How are you mom");
+   return (
         <div>
-            
-            <button onClick={handleTestData}  className="btn btn-accent mt-20 text-center">Accent</button>
+            <h1>This is secret page here...</h1>
         </div>
     );
 };
