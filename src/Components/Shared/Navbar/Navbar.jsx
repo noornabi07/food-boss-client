@@ -32,7 +32,7 @@ const Navbar = () => {
         <li><Link to="/menu">Our Menu</Link></li>
         <li><Link to="/secret">Secret</Link></li>
         <li><Link to="/order/salad">Order Food</Link></li>
-        <li><Link to="/">
+        <li><Link to="/dashboard/mycart">
             <button className="flex gap-1 items-center">
                 <FaShoppingCart className='text-2xl'></FaShoppingCart>
                 <div className="badge -mt-5 -ml-5 badge-secondary">+{cart?.length || 0}</div>
