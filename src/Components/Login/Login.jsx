@@ -5,6 +5,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { UserContext } from '../../provider/AuthProvider';
 import Swal from 'sweetalert2';
+import SocialLogin from '../Shared/SocialLogin/SocialLogin';
 
 const Login = () => {
     const [disabled, setDisabled] = useState(true);
@@ -34,8 +35,8 @@ const Login = () => {
                     showConfirmButton: false,
                     timer: 1500
                 })
-                navigate(from, {replace: true});
-                
+                navigate(from, { replace: true });
+
             })
     }
 
@@ -73,7 +74,7 @@ const Login = () => {
                                 </label>
                                 <input type="password" name='password' placeholder="password" className="input input-bordered" />
                                 <label className="label">
-                                    <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
+                                    <a href="#" className="label-text-alt link link-hover -mb-4">Forgot password?</a>
                                 </label>
                             </div>
                             <div className="form-control">
@@ -87,6 +88,11 @@ const Login = () => {
                             </div>
                         </form>
                         <p className='font-semibold text-green-500 text-center -mt-4 pb-4'>New Here? <Link to="/register" className='text-purple-500 hover:text-slate-500'>Create a account</Link></p>
+
+                        {/* social login here */}
+                        <div className='-mt-4'>
+                            <SocialLogin></SocialLogin>
+                        </div>
                     </div>
                 </div>
             </div>

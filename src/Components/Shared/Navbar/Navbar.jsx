@@ -12,14 +12,6 @@ const Navbar = () => {
     const { user, logOut } = useContext(UserContext);
     const [cart] = useCarts()
     console.log('cart item', cart);
-    // const [carts, setCarts] = useState([]);
-    // console.log(carts);
-
-    // useEffect( () =>{
-    //     fetch(`http://localhost:5000/carts?email=${user?.email}`)
-    //     .then(res => res.json())
-    //     .then(data => setCarts(data));
-    // }, [carts])
 
     const handleLogOut = () => {
         logOut()
