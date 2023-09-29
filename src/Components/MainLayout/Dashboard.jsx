@@ -4,8 +4,10 @@ import { FaCalendarAlt, FaHome, FaShoppingCart } from 'react-icons/fa';
 import { FaWallet } from 'react-icons/fa';
 import { BiMenu, BiSolidContact } from 'react-icons/Bi';
 import { AiFillShopping } from 'react-icons/Ai';
+import useCarts from '../../Hooks/useCarts';
 
 const Dashboard = () => {
+    const [cart] = useCarts();
     return (
         <div>
             <div className="drawer lg:drawer-open">
@@ -23,13 +25,17 @@ const Dashboard = () => {
                         <li><Link to="/dashboard/userhome"><FaHome></FaHome>User Home</Link></li>
                         <li><Link to="/dashboard/reservation"><FaCalendarAlt></FaCalendarAlt>Reservation</Link></li>
                         <li><Link to="/dashboard/history"><FaWallet></FaWallet> Payment History</Link></li>
-                        <li><Link to="/dashboard/mycart"><FaShoppingCart></FaShoppingCart> My Cart</Link></li>
+                        <li>
+                            <Link to="/dashboard/mycart"><FaShoppingCart></FaShoppingCart> My Cart <div className="badge mr-32 badge-secondary">+{cart?.length || 0}</div></Link>
+                            
+                        </li>
+
                         <div className="divider"></div>
                         <li><Link to="/"><FaHome></FaHome>HOME</Link></li>
                         <li><Link to="/menu"><BiMenu></BiMenu>MENU</Link></li>
-                        <li><Link to="/dashboard/shop"><AiFillShopping></AiFillShopping>SHOP</Link></li>
+                        <li><Link to="/dashboard/shop"><AiFillShopping></AiFillShopping>SHOP</Link ></li>
                         <li><Link to="/dashboard/contact"><BiSolidContact></BiSolidContact>CONTACT</Link></li>
-                        
+
                     </ul>
 
                 </div>

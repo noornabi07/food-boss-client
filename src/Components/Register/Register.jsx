@@ -8,37 +8,50 @@ import Swal from 'sweetalert2';
 
 const Register = () => {
     const { register, handleSubmit, reset, formState: { errors }, } = useForm();
-    const {createUser, updateUserProfile} = useContext(UserContext);
+    const { createUser, updateUserProfile } = useContext(UserContext);
     const navigate = useNavigate();
 
     const onSubmit = data => {
         console.log(data);
         createUser(data.email, data.password)
-        .then(result =>{
-            const newUser = result.user;
-            console.log(newUser);
-            updateUserProfile(data.name, data.photoURL)
-            .then( () =>{
-                console.log("updated user profile")
-                reset()
-                Swal.fire({
-                    position: 'top-end',
-                    icon: 'success',
-                    title: 'Your Account Create Successfull',
-                    showConfirmButton: false,
-                    timer: 1500
-                  })
-                  navigate("/");
+            .then(result => {
+                const newUser = result.user;
+                console.log(newUser);
+                updateUserProfile(data.name, data.photoURL)
+                    .then(() => {
+                        const saveUser = {name: data.name, email: data.email}
+                        fetch('http://localhost:5000/users', {
+                            method: 'POST',
+                            headers: {
+                                'content-type': 'application/json'
+                            },
+                            body: JSON.stringify(saveUser)
+                        })
+                            .then(res => res.json())
+                            .then(data => {
+                                if (data.insertedId) {
+                                    reset()
+                                    Swal.fire({
+                                        position: 'top-end',
+                                        icon: 'success',
+                                        title: 'Your Account Create Successfull',
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    })
+                                    navigate("/");
+                                }
+                            })
+
+                    })
+                    .catch(errors => console.log(errors));
             })
-            .catch(errors => console.log(errors));
-        })
     }
 
     return (
         <>
-        <Helmet>
-            <title>Food Boss | Register</title>
-        </Helmet>
+            <Helmet>
+                <title>Food Boss | Register</title>
+            </Helmet>
             <div className="hero min-h-screen">
                 <div className="hero-content flex-col lg:flex-row">
                     <div className="text-center md:w-1/2 lg:text-left">
@@ -60,7 +73,7 @@ const Register = () => {
                                 <label className="label">
                                     <span className="label-text">Photo URL</span>
                                 </label>
-                                <input type="text" {...register('photoURL', { required: true })}  placeholder="Photo URL" className="input input-bordered" />
+                                <input type="text" {...register('photoURL', { required: true })} placeholder="Photo URL" className="input input-bordered" />
                                 {errors.photoURL && <p className='text-red-600'>Photo URl is required.</p>}
                             </div>
                             {/* email input */}
