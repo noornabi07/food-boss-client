@@ -10,7 +10,7 @@ const Dashboard = () => {
         <div>
             <div className="drawer lg:drawer-open">
                 <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-                <div className="drawer-content flex flex-col items-center justify-center">
+                <div className="drawer-content bg-slate-500 flex flex-col items-center justify-center">
                     {/* Page content here */}
                     <Outlet></Outlet>
                     <label htmlFor="my-drawer-2" className="btn btn-primary drawer-button lg:hidden">Open drawer</label>
@@ -18,17 +18,17 @@ const Dashboard = () => {
                 </div>
                 <div className="drawer-side">
                     <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-                    <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
+                    <ul className="menu p-4 w-80 min-h-full bg-[#D1A054] text-white">
                         {/* Sidebar content here */}
-                        <li><Link to="/"><FaHome></FaHome>User Home</Link></li>
-                        <li><Link><FaCalendarAlt></FaCalendarAlt>Reservation</Link></li>
-                        <li><Link><FaWallet></FaWallet> Payment History</Link></li>
+                        <li><Link to="/dashboard/userhome"><FaHome></FaHome>User Home</Link></li>
+                        <li><Link to="/dashboard/reservation"><FaCalendarAlt></FaCalendarAlt>Reservation</Link></li>
+                        <li><Link to="/dashboard/history"><FaWallet></FaWallet> Payment History</Link></li>
                         <li><Link to="/dashboard/mycart"><FaShoppingCart></FaShoppingCart> My Cart</Link></li>
                         <div className="divider"></div>
                         <li><Link to="/"><FaHome></FaHome>HOME</Link></li>
                         <li><Link to="/menu"><BiMenu></BiMenu>MENU</Link></li>
-                        <li><Link><AiFillShopping></AiFillShopping>SHOP</Link></li>
-                        <li><Link><BiSolidContact></BiSolidContact>CONTACT</Link></li>
+                        <li><Link to="/dashboard/shop"><AiFillShopping></AiFillShopping>SHOP</Link></li>
+                        <li><Link to="/dashboard/contact"><BiSolidContact></BiSolidContact>CONTACT</Link></li>
                         
                     </ul>
 
