@@ -3,13 +3,43 @@ import { Helmet } from 'react-helmet-async';
 import useCarts from '../../../Hooks/useCarts';
 import { AiFillDelete } from 'react-icons/Ai';
 import { FaTrashAlt } from 'react-icons/fa';
+import Swal from 'sweetalert2';
 
 
 const MyCart = () => {
-    const [cart] = useCarts();
+    const [cart, refetch] = useCarts();
     const total = cart.reduce((sum, item) => item.price + sum, 0)
+
+    const handleDelete = item =>{
+        Swal.fire({
+            title: 'Are you sure?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+          }).then((result) => {
+            if (result.isConfirmed) {
+             fetch(`http://localhost:5000/carts/${item._id}`, {
+                method: 'DELETE',
+             })
+             .then(res => res.json())
+             .then(data => {
+                if(data.deletedCount> 0){
+                    refetch();
+                    Swal.fire(
+                        'Deleted!',
+                        'Your file has been deleted.',
+                        'success'
+                      )
+                }
+             })
+            }
+          })
+    }
+
     return (
-        <div>
+        <div className='w-full p-5'>
             <Helmet>
                 <title>Food Boss | My Cart</title>
             </Helmet>
@@ -44,7 +74,7 @@ const MyCart = () => {
                                 </td>
                                 <td>{item.name}</td>
                                 <td>${item.price}</td>
-                                <td><button className='btn btn-sm btn-ghost'><FaTrashAlt className='text-xl'></FaTrashAlt></button></td>
+                                <td><button onClick={() => handleDelete(item)} className='btn btn-sm btn-ghost'><FaTrashAlt className='text-xl'></FaTrashAlt></button></td>
                             </tr>)
                         }
 
