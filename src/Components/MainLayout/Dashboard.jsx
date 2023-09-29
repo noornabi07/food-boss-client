@@ -1,13 +1,19 @@
 import React from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import { FaCalendarAlt, FaHome, FaShoppingCart } from 'react-icons/fa';
-import { FaWallet } from 'react-icons/fa';
+import { FaWallet, FaUsers } from 'react-icons/fa';
 import { BiMenu, BiSolidContact } from 'react-icons/Bi';
-import { AiFillShopping } from 'react-icons/Ai';
+import { AiFillShopping, AiFillBook } from 'react-icons/Ai';
+import { ImSpoonKnife } from 'react-icons/Im';
 import useCarts from '../../Hooks/useCarts';
 
 const Dashboard = () => {
     const [cart] = useCarts();
+
+    // TODO: User load data from databse isAdmin here
+    const isAdmin = true;
+
+
     return (
         <div>
             <div className="drawer lg:drawer-open">
@@ -21,14 +27,31 @@ const Dashboard = () => {
                 <div className="drawer-side">
                     <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
                     <ul className="menu p-4 w-80 min-h-full bg-[#D1A054] text-white">
-                        {/* Sidebar content here */}
-                        <li><Link to="/dashboard/userhome"><FaHome></FaHome>User Home</Link></li>
-                        <li><Link to="/dashboard/reservation"><FaCalendarAlt></FaCalendarAlt>Reservation</Link></li>
-                        <li><Link to="/dashboard/history"><FaWallet></FaWallet> Payment History</Link></li>
-                        <li>
-                            <Link to="/dashboard/mycart"><FaShoppingCart></FaShoppingCart> My Cart <div className="badge mr-32 badge-secondary">+{cart?.length || 0}</div></Link>
-                            
-                        </li>
+
+                        {
+                            isAdmin ? <>
+                                {/* This is admin dashboard item */}
+                                <li><Link to="/dashboard/userhome"><FaHome></FaHome>Admin Home</Link></li>
+                                <li><Link to="/dashboard/addItems"><ImSpoonKnife></ImSpoonKnife>Add Items</Link></li>
+                                <li><Link to="/dashboard/manageItems"><BiMenu></BiMenu> Manage Items</Link></li>
+                                <li> <Link to="/dashboard/manageBooking"><AiFillBook></AiFillBook> Manage Bookings</Link></li>
+                                <li> <Link to="/dashboard/allUsers"><FaUsers></FaUsers> All Users</Link></li>
+                            </> : <>
+
+
+                                {/* This Is normal users dashboard item */}
+                                <li><Link to="/dashboard/userhome"><FaHome></FaHome>User Home</Link></li>
+                                <li><Link to="/dashboard/reservation"><FaCalendarAlt></FaCalendarAlt>Reservation</Link></li>
+                                <li><Link to="/dashboard/history"><FaWallet></FaWallet> Payment History</Link></li>
+                                <li>
+                                    <Link to="/dashboard/mycart"><FaShoppingCart></FaShoppingCart> My Cart <div className="badge mr-32 badge-secondary">+{cart?.length || 0}</div></Link>
+
+                                </li>
+
+                            </>
+                        }
+
+
 
                         <div className="divider"></div>
                         <li><Link to="/"><FaHome></FaHome>HOME</Link></li>
