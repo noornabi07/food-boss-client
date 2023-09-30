@@ -2,15 +2,17 @@ import banner from '../../assets/others/authentication1.png'
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { UserContext } from '../../provider/AuthProvider';
 import Swal from 'sweetalert2';
 import SocialLogin from '../Shared/SocialLogin/SocialLogin';
 
 const Register = () => {
+    const [error, setError] = useState('');
     const { register, handleSubmit, reset, formState: { errors }, } = useForm();
     const { createUser, updateUserProfile } = useContext(UserContext);
     const navigate = useNavigate();
+
 
     const onSubmit = data => {
         console.log(data);
@@ -33,7 +35,7 @@ const Register = () => {
                                 if (data.insertedId) {
                                     reset()
                                     Swal.fire({
-                                        position: 'top-end',
+                                        position: 'top-center',
                                         icon: 'success',
                                         title: 'Your Account Create Successfull',
                                         showConfirmButton: false,
@@ -44,7 +46,10 @@ const Register = () => {
                             })
 
                     })
-                    .catch(errors => console.log(errors));
+                    .catch(error => {
+                        console.log(error);
+                        setError(error.message)
+                    });
             })
     }
 
@@ -60,6 +65,9 @@ const Register = () => {
                     </div>
                     <div className="card md:w-1/2 flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
                         <h1 className='text-center text-3xl font-semibold text-purple-500 mt-3'>Sign Up</h1>
+
+                        <p>{error}</p>
+
                         <form onSubmit={handleSubmit(onSubmit)} className="card-body -mt-8">
                             {/* name input */}
                             <div className="form-control">
