@@ -1,6 +1,7 @@
 import React, { createContext, useEffect, useState } from 'react';
 import { GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import app from '../firebase/firebase.config';
+import axios from 'axios';
 
 export const UserContext = createContext(null);
 
@@ -41,7 +42,24 @@ const AuthProvider = ({ children }) => {
         const unsubsCribes = onAuthStateChanged(auth, currentUser => {
             setUser(currentUser);
             console.log("current user:", currentUser);
-            setLoading(false)
+
+            // axios using for get data post with secure
+            if(currentUser){
+                axios.post('http://localhost:5000/jwt', {email: currentUser.email})
+                .then(data =>{
+                    // console.log("Token Number", data.data);
+                    localStorage.setItem('access-token', data.data)
+                    setLoading(false)
+                })
+                // setLoading(false)
+                
+            }
+            else{
+                localStorage.removeItem('access-token');
+            }
+
+
+            // setLoading(false)
         });
 
         return () => {

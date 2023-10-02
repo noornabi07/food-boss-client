@@ -6,12 +6,14 @@ import { BiMenu, BiSolidContact } from 'react-icons/Bi';
 import { AiFillShopping, AiFillBook } from 'react-icons/Ai';
 import { ImSpoonKnife } from 'react-icons/Im';
 import useCarts from '../../Hooks/useCarts';
+import useAdmin from '../../Hooks/useAdmin';
 
 const Dashboard = () => {
     const [cart] = useCarts();
 
     // TODO: User load data from databse isAdmin here
-    const isAdmin = true;
+    // const isAdmin = false;
+    const [isAdmin] = useAdmin();
 
 
     return (
