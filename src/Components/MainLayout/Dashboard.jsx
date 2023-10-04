@@ -34,7 +34,7 @@ const Dashboard = () => {
                             isAdmin ? <>
                                 {/* This is admin dashboard item */}
                                 <li><Link to="/dashboard/userhome"><FaHome></FaHome>Admin Home</Link></li>
-                                <li><Link to="/dashboard/addItems"><ImSpoonKnife></ImSpoonKnife>Add Items</Link></li>
+                                <li><Link to="/dashboard/addItem"><ImSpoonKnife></ImSpoonKnife>Add Items</Link></li>
                                 <li><Link to="/dashboard/manageItems"><BiMenu></BiMenu> Manage Items</Link></li>
                                 <li> <Link to="/dashboard/manageBooking"><AiFillBook></AiFillBook> Manage Bookings</Link></li>
                                 <li> <Link to="/dashboard/allUsers"><FaUsers></FaUsers> All Users</Link></li>
