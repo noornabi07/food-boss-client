@@ -4,6 +4,7 @@ import useCarts from '../../../Hooks/useCarts';
 import { AiFillDelete } from 'react-icons/Ai';
 import { FaTrashAlt } from 'react-icons/fa';
 import Swal from 'sweetalert2';
+import { Link } from 'react-router-dom';
 
 
 const MyCart = () => {
@@ -46,7 +47,7 @@ const MyCart = () => {
             <div className='flex justify-evenly text-lg font-bold text-white'>
                 <h1>Total Items: {cart.length}</h1>
                 <h1>Total Prices: ${total}</h1>
-                <button className="btn btn-warning btn-sm">Pay</button>
+                <Link to="/dashboard/payment"><button className="btn btn-warning btn-sm">Pay</button></Link>
             </div>
 
             <div className="overflow-x-auto border mt-5">
