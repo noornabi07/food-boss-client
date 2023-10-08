@@ -4,24 +4,28 @@ import { useState } from 'react';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import { useEffect } from 'react';
 import { UserContext } from '../../../provider/AuthProvider';
+import Swal from 'sweetalert2';
+import { data } from 'autoprefixer';
 
-const CheckoutForm = ({ price }) => {
+const CheckoutForm = ({ price, cart }) => {
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
     const stripe = useStripe();
     const elements = useElements();
     const [axiosSecure] = useAxiosSecure();
-    const [clientSecret, setClientSec] = useState('');
+    const [clientSecret, setClientSecret] = useState('');
     const { user } = useContext(UserContext);
     const [processign, setProcessign] = useState(false)
-    
+
 
     useEffect(() => {
-        axiosSecure.post('/create-payment-intent', { price })
+        if(price > 0 ){
+            axiosSecure.post('/create-payment-intent', { price })
             .then(res => {
                 // console.log(res.data.clientSecret);
-                setClientSec(res.data.clientSecret);
+                setClientSecret(res.data.clientSecret);
             })
+        }
     }, [])
 
 
@@ -37,7 +41,7 @@ const CheckoutForm = ({ price }) => {
             return
         }
 
-        const { error, paymentMethod } = await stripe.createPaymentMethod({
+        const { error } = await stripe.createPaymentMethod({
             type: 'card',
             card
         })
@@ -74,10 +78,36 @@ const CheckoutForm = ({ price }) => {
 
         setProcessign(false)
 
-        if(paymentIntent.status === 'succeeded'){
+        if (paymentIntent.status === 'succeeded') {
             setError('')
             setSuccess('Your Payment Successfully');
             // TODO: The next steps 
+            const payments = {
+                email: user?.email,
+                trasectionId: paymentIntent.id,
+                price,
+                date: new Date(),
+                quantity: cart.length,
+                status: 'service panding',
+                cartItems: cart.map(item => item._id),
+                menuItems: cart.map(item => item.menuItemId),
+                itemsName: cart.map(item => item.name)
+            }
+            axiosSecure.post('/payments', payments)
+                .then(res => {
+                    console.log(res.data);
+                    if (res.data.insertedId) {
+                        // display sweetalert
+                        Swal.fire({
+                            position: 'top-center',
+                            icon: 'success',
+                            title: 'Your payment successfully',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+
+                    }
+                })
         }
     }
 
