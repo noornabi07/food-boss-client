@@ -20,7 +20,7 @@ const Dashboard = () => {
         <div>
             <div className="drawer lg:drawer-open">
                 <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-                <div className="drawer-content bg-slate-500 flex flex-col items-center justify-center">
+                <div className="drawer-content bg-slate-300 pt-10  flex flex-col items-center">
                     {/* Page content here */}
                     <Outlet></Outlet>
                     <label htmlFor="my-drawer-2" className="btn btn-primary drawer-button lg:hidden">Open drawer</label>
@@ -33,7 +33,7 @@ const Dashboard = () => {
                         {
                             isAdmin ? <>
                                 {/* This is admin dashboard item */}
-                                <li><Link to="/dashboard/userhome"><FaHome></FaHome>Admin Home</Link></li>
+                                <li><Link to="/dashboard/adminHome"><FaHome></FaHome>Admin Home</Link></li>
                                 <li><Link to="/dashboard/addItem"><ImSpoonKnife></ImSpoonKnife>Add Items</Link></li>
                                 <li><Link to="/dashboard/manageItems"><BiMenu></BiMenu> Manage Items</Link></li>
                                 <li> <Link to="/dashboard/manageBooking"><AiFillBook></AiFillBook> Manage Bookings</Link></li>
@@ -42,7 +42,7 @@ const Dashboard = () => {
 
 
                                 {/* This Is normal users dashboard item */}
-                                <li><Link to="/dashboard/userhome"><FaHome></FaHome>User Home</Link></li>
+                                <li><Link to="/dashboard/userHome"><FaHome></FaHome>User Home</Link></li>
                                 <li><Link to="/dashboard/reservation"><FaCalendarAlt></FaCalendarAlt>Reservation</Link></li>
                                 <li><Link to="/dashboard/history"><FaWallet></FaWallet> Payment History</Link></li>
                                 <li>

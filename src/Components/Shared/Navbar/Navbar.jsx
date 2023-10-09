@@ -5,12 +5,14 @@ import { FaShoppingCart } from 'react-icons/fa';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import useCarts from '../../../Hooks/useCarts';
+import useAdmin from '../../../Hooks/useAdmin';
 
 
 
 const Navbar = () => {
     const { user, logOut } = useContext(UserContext);
     const [cart] = useCarts()
+    const [isAdmin] = useAdmin();
     console.log('cart item', cart);
 
     const handleLogOut = () => {
@@ -22,7 +24,10 @@ const Navbar = () => {
     const navOptions = <>
         <li><Link to="/">Home</Link></li>
         <li><Link to="/menu">Our Menu</Link></li>
-        <li><Link to="/secret">Secret</Link></li>
+
+        <li><Link to={ isAdmin ? '/dashboard/adminHome' : '/dashboard/userHome' }>Dashboard</Link></li>
+
+
         <li><Link to="/order/salad">Order Food</Link></li>
         <li><Link to="/dashboard/mycart">
             <button className="flex gap-1 items-center">

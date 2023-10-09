@@ -5,11 +5,11 @@ import { Navigate, useLocation } from 'react-router-dom';
 const PrivetRoutes = ({ children }) => {
     const { user, loading } = useContext(UserContext);
     const location = useLocation();
-    if (loading) {
-        return <button className="btn btn-square">
-            <span className="loading loading-spinner"></span>
-        </button>
-    }
+    // if (loading) {
+    //     return <button className="btn btn-square">
+    //         <span className="loading loading-spinner"></span>
+    //     </button>
+    // }
     if (user) {
         return children;
     }
