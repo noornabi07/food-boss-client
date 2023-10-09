@@ -6,7 +6,7 @@ import { UserContext } from '../provider/AuthProvider';
 
 
 const axiosSecure = axios.create({
-    baseURL: 'http://localhost:5000',
+    baseURL: 'https://food-boss-server-noornabi07.vercel.app',
 });
 
 const useAxiosSecure = () => {

@@ -45,7 +45,7 @@ const AuthProvider = ({ children }) => {
 
             // axios using for get data post with secure
             if(currentUser){
-                axios.post('http://localhost:5000/jwt', {email: currentUser.email})
+                axios.post('https://food-boss-server-noornabi07.vercel.app/jwt', {email: currentUser.email})
                 .then(data =>{
                     // console.log("Token Number", data);
                     localStorage.setItem('access-token', data.data)
